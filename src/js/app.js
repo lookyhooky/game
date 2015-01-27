@@ -3,6 +3,8 @@
 
 var app = (function($) {
 
+  var configMap = {}
+
   var initModule = function( $container ) {
 
   };

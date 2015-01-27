@@ -9,7 +9,7 @@ $medGray: #777;
 $drkGray: #2d2d2d;
 $black: #000;
 $red: #dc143c;
-
+   
 body {
   font-family: $font-stack;
 }
@@ -82,7 +82,18 @@ section {
 }
 
 #app {
-  @include outer-container;
+    @include outer-container;
+    width: 640px;
+}
+
+#game {
+    @include outer-container;
+    width: 640px;
+}
+
+#surface {
+    @include box-sizing(border-box);
+    border: rgb(200,200,200) 1px solid;
 }
 
 #hero {
@@ -98,13 +109,13 @@ section {
   }
 }
 
-#about, #cranes, #contact {
-  h2 {
-    text-align: center;
-    font-size: 2em;
-    font-weight: 400;
-  }
-  @media screen and (max-width: $mobile-width) {
+/* #about, #cranes, #contact { */
+/*   h2 { */
+/*     text-align: center; */
+/*     font-size: 2em; */
+/*     font-weight: 400; */
+/*   } */
+/*   @media screen and (max-width: $mobile-width) { */
 
-  }
-}
+/*   } */
+/* } */
