@@ -81,12 +81,15 @@ function Graph(x, y) {
 
   var Node = function(q,r) {
     // A hexagon node of a graph
-    var x = y = null;    
-    if (q % 2 == 0)
-      x = q * horiz + origin.x;
-    else
-      x = q * horiz + origin.x + horiz / 2;
-    y = r * vert + origin.y;
+    
+    this.q = q;
+    this.r = r;
+    
+    var x = 0;
+    var y = 0;
+
+    x = this.q * horiz + this.r * horiz / 2 + origin.x;
+    y = this.r * vert + origin.y;
 
     Poly.call(this, scale, 6, x, y, Math.PI / 6)
     this.init();
@@ -102,11 +105,21 @@ function Graph(x, y) {
   });
 
   Node.prototype.init = function() {
-    this.el = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-
+    this.el = document.createElementNS('http://www.w3.org/2000/svg',
+                                       'g');
+    this.polyEl = document.createElementNS('http://www.w3.org/2000/svg',
+                                           'polygon');
+    this.textEl = document.createElementNS('http://www.w3.org/2000/svg',
+                                           'text');
     this.svg = {};
     this.svg.points = "";
-    this.el.className.baseVal = "hexagon";
+
+    this.text = {};
+    this.text.x = this.center.x;
+    this.text.y = this.center.y;
+    this.text.textContent = this.q + ',' + this.r;
+    
+    this.polyEl.className.baseVal = "hexagon";
     
     var current = 0;
 
@@ -120,24 +133,29 @@ function Graph(x, y) {
       this.svg.points = this.svg.points + current[0] + "," + current[1];
     }
 
-    this.el.setAttribute('points', this.svg.points);
+    this.polyEl.setAttribute('points', this.svg.points);
+    
+    this.textEl.setAttribute('x', this.text.x);
+    this.textEl.setAttribute('y', this.text.y + 4);
+    this.textEl.setAttribute('style', "text-anchor: middle;font-size:12px")
+    this.textEl.textContent = this.text.textContent;
+
+    this.el.appendChild(this.polyEl);
+    this.el.appendChild(this.textEl);
+  }
+
+  for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 3; j++) {
+      this.nodes[[i,j]] = new Node(i,j);
+      this.nodes[[-i,-j]] = new Node(-i,-j);
+      this.nodes[[i,-j]] = new Node(i,-j);
+      this.nodes[[-i,j]] = new Node(-i,j)
+    }
   }
   
-  this.nodes["0,0"] = new Node(0,0);
-  this.nodes["0,1"] = new Node(0,1);
-  this.nodes["-1,1"] = new Node(-1,1);
-  this.nodes["-1,-1"] = new Node(-1,-1);
-  this.nodes["0,-1"] = new Node(0,-1);
-
   for (var node in this.nodes) {
     this.el.appendChild(this.nodes[node].el);
   }
-  // for (var i = 0; i < q; i++) {
-
-  //   for (var j = 0; j < r; j++) {
-
-  //   }
-  // }
 
   s.append(this.el);
 }
