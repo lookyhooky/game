@@ -50,6 +50,13 @@ module.exports = function(grunt) {
         
       },
       src: ['tmp/app.js',
+            'tmp/app.calc.js',
+            'tmp/app.type.node.js',
+            'tmp/app.type.edge.js',
+            'tmp/app.type.graph.js',
+            'tmp/app.draw.js',
+            'tmp/app.map.js',
+            'tmp/app.shell.js',
             'tmp/color.js',
             'tmp/draw.js',
             'tmp/events.js'],
@@ -93,6 +100,7 @@ module.exports = function(grunt) {
       files: ['src/js/**/*.js'],
       tasks: ['copy:js', 'concat:scripts'],
       options: {
+        dot: false,
         spawn: false,
         livereload: true
       }
@@ -101,6 +109,7 @@ module.exports = function(grunt) {
       files: ['src/sass/**/*.scss'],
       tasks: ['sass'],
       options: {
+        dot: false,
         spawn: false,
         livereload: true
       }
@@ -109,6 +118,7 @@ module.exports = function(grunt) {
       files: ['src/index.html'],
       tasks: ['copy:html'],
       options: {
+        dot: false,
         spawn: false,
         livereload: true
       }
