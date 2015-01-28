@@ -11,7 +11,6 @@ app.type.Graph = (function() {
   // public properties
 
   function Graph() {
-    // 'origin' the center point of q:0,r:0
 
     this.nodes = {};
 

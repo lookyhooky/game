@@ -7,11 +7,11 @@
 app.calc = (function($) {
 
   var scale = 10;
-  
+
   var isoPoly = function(sides, offset) {
 
     var vertices = [];
-    
+
     var angle = null;
     var offset = offset || 0;
 
@@ -20,7 +20,7 @@ app.calc = (function($) {
       vertices.push((scale * Math.cos(angle)),
                     (scale * Math.sin(angle)));
     }
-    
+
     return vertices;
   }
 
@@ -41,7 +41,7 @@ app.calc = (function($) {
 
     return res;
   }
-  
+
   var configMap = {}
 
   var initModule = function( $container ) {
@@ -54,8 +54,3 @@ app.calc = (function($) {
     isoHexDimensions : isoHexDimensions
   };
 }(jQuery));
-
-// Poly.prototype.getVertex = function(index) {
-//   var current = index * 2;   // grab vertices in pairs
-//   return [ this.vertices[current], this.vertices[current + 1] ];
-// }

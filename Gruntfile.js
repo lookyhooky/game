@@ -58,8 +58,7 @@ module.exports = function(grunt) {
             'tmp/app.type.edge.js',
             'tmp/app.type.graph.js',
             'tmp/app.draw.js',
-            
-            'tmp/events.js'],
+            'tmp/app.events.js'],
       dest: 'public/js/app.js'
     }
   });

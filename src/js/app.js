@@ -1,5 +1,5 @@
 //
-// app module ** depends on dice module
+// app module
 
 var app = (function($) {
 
