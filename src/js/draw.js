@@ -1,3 +1,5 @@
+var s = $("#surface");
+
 function Poly(size, sides, x, y, offset) {
   // Poly constructor
   this.size = size;
@@ -26,6 +28,7 @@ Poly.prototype.getVertex = function(index) {
 }
 
 function calcHexDimensions(scale, pointy_p) {
+
   var res = {};
 
   if (pointy_p) {
@@ -43,31 +46,49 @@ function calcHexDimensions(scale, pointy_p) {
   return res;
 }
 
-function Graph(origin) {
+function Graph(x, y) {
   // 'origin' the center point of q:0,r:0
   // I want this function to take a map object and draw them by finding the
   // neighbors.
 
+  var origin = {x: x, y: y}
+  
   this.nodes = {};
-  
-  var scale = 35;
-  var tmpMap = { '0,0': true }
-  var dimesions = calcHexDimensions(scale, true);
 
-  console.log(dimesions);
-  
-  var q = 3;
-  var r = 3;
+  this.el = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    
+  var scale = 35;
+  var vert = calcHexDimensions(scale, true).vert;
+  var horiz = calcHexDimensions(scale, true).horiz;
 
   var neighbors = [
-    [+1, 0],[+1,-1],[ 0,-1],
-    [-1, 0],[-1,+1],[ 0,+1]
+    [1,0],[1,-1],[0,-1],
+    [-1,0],[-1,1],[0,1]
   ];
 
-  var Node = function(x,y) {
-    // A hexagon node of a graph
-    Poly.call(this, scale, 6, x, y, Math.PI / 6)
+  this.hasNeigbors= function(q, r) {
+    var res = {};
+    for (var i = 0; i < neighbors.length; i++) {
+      console.log(neighbors[i][0], neighbors[i][1])
+      if (this.nodes[[q+neighbors[i][0],r+neighbors[i][1]]])
+        res[[q+neighbors[i][0],r+neighbors[i][1]]] = true;
+      else
+        res[[q+neighbors[i][0],r+neighbors[i][1]]] = false;
+      
+    }
+    return res;
+  }
 
+  var Node = function(q,r) {
+    // A hexagon node of a graph
+    var x = y = null;    
+    if (q % 2 == 0)
+      x = q * horiz + origin.x;
+    else
+      x = q * horiz + origin.x + horiz / 2;
+    y = r * vert + origin.y;
+
+    Poly.call(this, scale, 6, x, y, Math.PI / 6)
     this.init();
   }
 
@@ -84,14 +105,9 @@ function Graph(origin) {
     this.el = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
 
     this.svg = {};
-    this.svg.style = "fill:lightgray;stroke:black;stroke-width:1";
     this.svg.points = "";
-
     this.el.className.baseVal = "hexagon";
-    surface.appendChild(this.el);
-  }
-  
-  Node.prototype.draw = function() {
+    
     var current = 0;
 
     for (var i = 0; i < this.sides; i++) {
@@ -105,18 +121,25 @@ function Graph(origin) {
     }
 
     this.el.setAttribute('points', this.svg.points);
-    this.el.setAttribute('style', this.svg.style)
-    
   }
-
-  this.nodes["0,0"] = new Node(100,100);
   
-  for (var i = 0; i < q; i++) {
+  this.nodes["0,0"] = new Node(0,0);
+  this.nodes["0,1"] = new Node(0,1);
+  this.nodes["-1,1"] = new Node(-1,1);
+  this.nodes["-1,-1"] = new Node(-1,-1);
+  this.nodes["0,-1"] = new Node(0,-1);
 
-    for (var j = 0; j < r; j++) {
-      console.log("test", i, j)
-    }
+  for (var node in this.nodes) {
+    this.el.appendChild(this.nodes[node].el);
   }
+  // for (var i = 0; i < q; i++) {
+
+  //   for (var j = 0; j < r; j++) {
+
+  //   }
+  // }
+
+  s.append(this.el);
 }
 
 function drawGrid(color, stepx, stepy) {
