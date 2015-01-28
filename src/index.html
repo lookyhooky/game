@@ -22,29 +22,31 @@
   <script src="js/jquery.js"></script>
   <script src="js/d3.js"></script>
 
+  <!-- my javascript -->
+  <script src="js/app.js"></script>
+
+  <!-- quick css testing -->
   <style type="text/css" media="screen">
-   
-   
+
   </style>
+
 </head>
 <body>
 
     <header>
         <h1>Wizards In Space</h1>
     </header>
-    
-    <div id="app">
-        
-    </div>
-    
+
+    <div id="app"></div>
+
     <script src="http://localhost:35729/livereload.js"></script>
-    <script src="js/app.js"></script>
-  
+
     <script>
-     $(document).ready(function() {
-         app.initModule( $('#app') );
+      $(document).ready(function() {
+          var container = document.getElementById('app');
+          app.initModule(container);
      }());
     </script>
-    
+
 </body>
 </html>

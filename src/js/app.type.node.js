@@ -46,6 +46,7 @@ app.type.Node = (function() {
   }
 
   Node.prototype.init = function() {
+    
     this.el = document.createElementNS('http://www.w3.org/2000/svg',
                                        'g');
     this.polyEl = document.createElementNS('http://www.w3.org/2000/svg',
@@ -83,17 +84,10 @@ app.type.Node = (function() {
 
     this.el.appendChild(this.polyEl);
     this.el.appendChild(this.textEl);
+
+    this.el.setAttribute('id', this.q + ',' + this.r);
   }
-
-  var initModule = function( $container ) {
-
-  };
 
   return Node;
 
 }());
-
-// Poly.prototype.getVertex = function(index) {
-//   var current = index * 2;   // grab vertices in pairs
-//   return [ this.vertices[current], this.vertices[current + 1] ];
-// }

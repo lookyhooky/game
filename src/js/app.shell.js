@@ -16,12 +16,9 @@ app.shell = (function($) {
   surface.setAttribute('width', configMap.width);
   surface.setAttribute('height', configMap.height);
   
-  var initModule = function( $container ) {
-    $container.append(surface);
-    
-    app.surface = $(surface);
-
-    app.map.initModule(app.surface);
+  var initModule = function( container ) {
+    container.appendChild(surface);
+    app.map.initModule(surface);
   };
 
   return {

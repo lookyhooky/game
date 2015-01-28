@@ -12,9 +12,9 @@ app.map = (function($) {
 
   var origin = { x: configMap.width / 2, y: configMap.height / 2 };
 
-  var initModule = function( $container ) {
-    var graph = new app.type.Graph();
-    $container.append(graph.el);
+  var initModule = function( container ) {
+    this.graph = new app.type.Graph();
+    container.appendChild(this.graph.el);
   };
 
   return {

@@ -16,7 +16,8 @@ app.type.Graph = (function() {
     this.nodes = {};
 
     this.el = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-
+    this.el.setAttribute('id', 'graph');
+    
     var neighbors = [
       [1,0],[1,-1],[0,-1],
       [-1,0],[-1,1],[0,1]
@@ -27,7 +28,6 @@ app.type.Graph = (function() {
       // but at the moment it works. It returns an map of true or false values
       var res = {};
       for (var i = 0; i < neighbors.length; i++) {
-        console.log(neighbors[i][0], neighbors[i][1])
         if (this.nodes[[q+neighbors[i][0],r+neighbors[i][1]]])
           res[[q+neighbors[i][0],r+neighbors[i][1]]] = true;
         else
@@ -54,8 +54,3 @@ app.type.Graph = (function() {
   return Graph;
 
 }());
-
-// Poly.prototype.getVertex = function(index) {
-//   var current = index * 2;   // grab vertices in pairs
-//   return [ this.vertices[current], this.vertices[current + 1] ];
-// }
