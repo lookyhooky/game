@@ -1,19 +1,19 @@
-function windowToCanvas(canvas, x, y) {
-  var bbox = canvas.getBoundingClientRect();
+//
+// app.events module
+//
 
-  return {
-    x: (x - bbox.left) * (canvas.width / bbox.width),
-    y: (y - bbox.top) * (canvas.height / bbox.height)
-  }
-}
+app.events = (function($) {
 
-// canvas.addEventListener('mousedown', function(e) {
-//   // var loc = windowToCanvas(canvas, e.clientX, e.clientY);
+  // app.addEventListener('mousedown', function(e) {
+    
+  //   e.preventDefault();
 
-//   e.preventDefault();
+  // });
+
+  window.addEventListener("keyup", function(e) {
+    console.log(String.fromCharCode(e.which), e.which);
+  });
+
+  return null;
   
-// });
-
-window.addEventListener("keyup", function(e) {
-  console.log(String.fromCharCode(e.which), e.which);
-});
+})(jQuery)

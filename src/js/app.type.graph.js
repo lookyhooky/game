@@ -35,8 +35,8 @@ app.type.Graph = (function() {
       return res;
     }
 
-    for (var i = 0; i < 3; i++) {
-      for (var j = 0; j < 3; j++) {
+    for (var i = 0; i < 4; i++) {
+      for (var j = 0; j < 4; j++) {
         this.nodes[[i,j]] = new app.type.Node(i,j);
         this.nodes[[-i,-j]] = new app.type.Node(-i,-j);
         this.nodes[[i,-j]] = new app.type.Node(i,-j);

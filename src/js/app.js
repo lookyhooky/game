@@ -6,8 +6,7 @@ var app = (function($) {
   var configMap = {}
 
   // public properties
-  var type = {}; // a map of constructors
-  var scale = 5;
+  var scale = 4.5;
   
   var initModule = function( container ) {
     
@@ -17,7 +16,6 @@ var app = (function($) {
 
   return {
     initModule : initModule,
-    type : type,
     scale : scale
   };
   

@@ -1,5 +1,13 @@
-.hexagon {
+$teal: hsla(148, 100%, 69%, 1.0000);
+$red: hsla(1, 100%, 50%, 1.0000);
+
+.node {
     fill:rgba(255,255,255,0.5);
     stroke:black;
-    stroke-width:1;
+    stroke-width:1px;
+}
+
+.nodeHover {
+    fill: $teal;
+    stroke: $red;
 }

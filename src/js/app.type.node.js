@@ -61,7 +61,7 @@ app.type.Node = (function() {
     this.text.y = this.y;
     this.text.textContent = this.q + ',' + this.r;
 
-    this.polyEl.className.baseVal = "hexagon";
+    this.polyEl.className.baseVal = "node";
 
     var current = 0;
 
