@@ -3,26 +3,55 @@
 
 app.shell = (function($) {
 
+  // private properties
   var configMap = {
-    width: 800,
-    height: 600
+
   }
 
   // public properties
-  
-  var surface = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); 
+  var width,
+      height,
+      surface,
+      getSize,
+      setSize,
+      initModule;
 
-  surface.setAttribute('id', 'surface');
-  surface.setAttribute('width', configMap.width);
-  surface.setAttribute('height', configMap.height);
-  
-  var initModule = function( container ) {
+  width = null;
+  height = null;
+
+  getSize = function() {
+    return {width: width, height: height};
+  }
+
+  setSize = function(updateWidth, updateHeight) {
+    width = updateWidth;
+    height = updateHeight;
+
+    surface.setAttribute('width', width);
+    surface.setAttribute('height', height);
+  };
+
+  initModule = function( container ) {
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+    
+    surface = app.draw.svg('svg', {id: 'surface',
+                                   width: width,
+                                   height: height});
+    
     container.appendChild(surface);
+
+    // initialize modules
     app.map.initModule(surface);
+    app.events.initModule(surface);
+
   };
 
   return {
-    initModule : initModule
+    initModule : initModule,
+    getSize : getSize,
+    setSize : setSize
   };
   
 }(jQuery));

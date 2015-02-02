@@ -1,18 +1,18 @@
 //
-// app.type.Graph module
+// app.type.Grid module
 //
 
-app.type.Graph = (function() {
+app.type.Grid = (function() {
 
   // private properties
   var configMap = {}
 
   // public properties
-  function Graph() {
+  function Grid(max_y) {
 
-    this.nodes = {};
+    this.cells = {};
 
-    this.el = app.draw.svg('g', {id: 'graph'});
+    this.el = app.draw.svg('g', {id: 'grid'});
     
     this.hasNeigbors= function(q, r) {
       // need to clean this up to be more readable ***
@@ -25,7 +25,7 @@ app.type.Graph = (function() {
       ];
       
       for (var i = 0; i < n.length; i++) {
-        if (this.nodes[[q+n[i][0],r+n[i][1]]])
+        if (this.cells[[q+n[i][0],r+n[i][1]]])
           res[[q+n[i][0],r+n[i][1]]] = true;
         else
           res[[q+n[i][0],r+n[i][1]]] = false;
@@ -43,7 +43,7 @@ app.type.Graph = (function() {
 
     function hexGrid(max_y) {
       // uses cubic coordinates, returns a Graph of Nodes using axial coordinates
-      var graph = {};
+      var grid = {};
       
       var diameter = max_y * 2;  // excluding 0,0
       var current_x = null;      // axial q
@@ -57,21 +57,21 @@ app.type.Graph = (function() {
           current_y = Math.abs(cube(current_x, current_z).y);
 
           if (current_y <= max_y)
-            graph[[current_x,current_z]] = new app.type.Node(current_x,current_z);
+            grid[[current_x,current_z]] = new app.type.Cell(current_x,current_z);
           else
             continue;
         }
       }
-      return graph;
+      return grid;
     }
 
-    this.nodes = hexGrid(3);
+    this.cells = hexGrid(max_y);
     
-    for (var node in this.nodes) {
-      this.el.appendChild(this.nodes[node].el);
+    for (var cell in this.cells) {
+      this.el.appendChild(this.cells[cell].el);
     }
   }
 
-  return Graph;
+  return Grid;
 
 }());

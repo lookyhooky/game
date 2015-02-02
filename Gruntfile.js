@@ -54,6 +54,8 @@ module.exports = function(grunt) {
             'tmp/app.calc.js',
             'tmp/app.shell.js',
             'tmp/app.map.js',
+            'tmp/app.type.cell.js',
+            'tmp/app.type.grid.js',
             'tmp/app.type.node.js',
             'tmp/app.type.edge.js',
             'tmp/app.type.graph.js',

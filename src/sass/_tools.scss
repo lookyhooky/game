@@ -27,6 +27,16 @@
   }
 }
 
+@mixin fullscreen {
+    @include clearfix;
+    @include box-sizing(border-box);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
 @mixin outer-container($local-max-width: $max-width) {
   @include clearfix;
   @include box-sizing(border-box);

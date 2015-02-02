@@ -1,7 +1,7 @@
 @import 'variables';
 @import 'tools';
 @import 'grid';
-@import 'graph';
+@import 'map';
 
 $white: #fff;
 $ltGray: #eee;
@@ -22,59 +22,23 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   line-height: 1.8em;
-  text-align: justify;
 }
 
 a, a:visited {
   text-decoration: none;
-  color: $red;
 }
 a:hover {
-  color: $medGray;
+  color: $red;
 }
 
 ul {
   list-style: none;
-  padding: .5em 0 1em 0;
-  text-align: center;
-}
-
-li {
-  margin: 0;
-  padding: 0;
-  line-height: 1.8em;
-}
-
-header {
-    @include outer-container;
-    width: 800px;
-    
-    h1 {
-        font-size: 3em;
-        font-weight: 400;
-        /* text-shadow: 1px 1px 2px $black; */
-    }
 }
 
 #app {
-    @include outer-container;
-    width: 800px;
+    @include fullscreen;
 }
 
 #surface {
     @include box-sizing(border-box);
-    border: rgb(200,200,200) 1px solid;
-}
-
-#hero {
-  padding: 1em 10%;
-  @media screen and (max-width: 720px) {
-    padding: 1em 5%;
-  }
-  h2 {
-    font-size: 2.5em;
-    font-weight: 400;
-    text-align: center;
-    text-shadow: 2px 2px 2px $ltGray;
-  }
 }
