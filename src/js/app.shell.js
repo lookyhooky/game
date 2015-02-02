@@ -43,6 +43,7 @@ app.shell = (function($) {
     container.appendChild(surface);
 
     // initialize modules
+    app.grid.initModule();
     app.map.initModule(surface);
     app.events.initModule(surface);
 

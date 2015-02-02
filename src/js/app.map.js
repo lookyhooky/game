@@ -2,14 +2,46 @@
 // app.map module
 
 app.map = (function($) {
-  
-  var configMap = {
+
+  // private properties
+  var configMap,
+      cube,
+      hexGrid;
+
+  configMap = {
     cellSize: 60
   }
 
+  cube = function(q, r) {
+    var z = r;
+    var x = q;
+    var y = q + r;
+    return {x: x, y: y, z: z};
+  }
+
+  hexGrid = function(max_y) {
+    // uses cubic coordinates, returns a Graph of Nodes using axial coordinates
+    var diameter = max_y * 2;  // excluding 0,0
+    var current_x = null;      // axial q
+    var current_z = null;      // axial r
+    var current_y = null;      // not returned for axial coordinates
+
+    for (var x = 0; x <= diameter; x++) {
+      for (var z = 0; z <= diameter; z++) {
+        current_x = x - max_y;
+        current_z = z - max_y;
+        current_y = Math.abs(cube(current_x, current_z).y);
+
+        if (current_y <= max_y)
+          app.grid.addCell(current_x,current_z);
+        else
+          continue;
+      }
+    }
+  }
+
   // public properties
-  var grid,
-      origin,
+  var origin,
       offset,
       getOrigin,
       setOrigin,
@@ -28,8 +60,10 @@ app.map = (function($) {
     
     origin.x = originX;
     origin.y = originY;
-    
-    grid.el.setAttribute('transform', 'translate(' + origin.x + ',' + origin.y + ')');
+
+    // need better way
+    app.grid.getElement().setAttribute('transform',
+                                       'translate(' + origin.x + ',' + origin.y + ')');
   }
 
   getOffset = function() {
@@ -45,19 +79,19 @@ app.map = (function($) {
     x = origin.x + offset.x;
     y = origin.y + offset.y;
     
-    grid.el.setAttribute('transform',
-                         'translate(' + x + ',' + y + ')');
+    app.grid.getElement().setAttribute('transform',
+                                       'translate(' + x + ',' + y + ')');
   }
+
   
   initModule = function( container ) {
     var shellSize;
     shellSize = app.shell.getSize();
     
-    grid = new app.type.Grid(3);
-    
     setOrigin(shellSize.width / 2, shellSize.height / 2 );
-    
-    container.appendChild(grid.el);
+
+    hexGrid(2);
+    container.appendChild(app.grid.getElement());
     
   };
 
