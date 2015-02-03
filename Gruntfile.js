@@ -49,14 +49,18 @@ module.exports = function(grunt) {
       options: {
         
       },
-      src: ['tmp/app.js',
+      src: ['tmp/events.js',
+            'tmp/app.js',
+            'tmp/app.test.js',
             'tmp/app.util.js',
             'tmp/app.type.js',
             'tmp/app.calc.js',
             'tmp/app.shell.js',
             'tmp/app.draw.js',
             'tmp/app.grid.js',
+            'tmp/app.grid.cell.js',
             'tmp/app.map.js',
+            'tmp/app.map.ui.js',
             'tmp/app.events.js'],
       dest: 'public/js/app.js'
     }

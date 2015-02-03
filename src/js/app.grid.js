@@ -16,6 +16,12 @@ app.grid = (function() {
   };
   
   cells = {};
+  this.cells = [
+    [],
+    [],
+    [],
+    [],
+    []];  // to replace cells while testing
 
   gridElement = app.draw.svg('g', {id: 'grid'});
 
@@ -140,6 +146,7 @@ app.grid = (function() {
   addCell = function(q, r) {
     if (cells[[q,r]] == null) {
       cells[[q,r]] = new Cell(q, r);
+      
       gridElement.appendChild(cells[[q,r]].getElement());
     } else {
       console.log('Cannot addCell() to grid if cells[[q,r]] exists');

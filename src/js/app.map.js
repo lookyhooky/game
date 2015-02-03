@@ -41,7 +41,8 @@ app.map = (function($) {
   }
 
   // public properties
-  var origin,
+  var mapEl,
+      origin,
       offset,
       getOrigin,
       setOrigin,
@@ -49,6 +50,8 @@ app.map = (function($) {
       setOffset,
       initModule;
 
+  mapEl = app.draw.svg('g', {id: 'map'});
+  
   origin = { x: 0, y: 0 };
   offset = { x: 0, y: 0 };
   
@@ -62,8 +65,8 @@ app.map = (function($) {
     origin.y = originY;
 
     // need better way
-    app.grid.getElement().setAttribute('transform',
-                                       'translate(' + origin.x + ',' + origin.y + ')');
+    mapEl.setAttribute('transform',
+                       'translate(' + origin.x + ',' + origin.y + ')');
   }
 
   getOffset = function() {
@@ -79,8 +82,8 @@ app.map = (function($) {
     x = origin.x + offset.x;
     y = origin.y + offset.y;
     
-    app.grid.getElement().setAttribute('transform',
-                                       'translate(' + x + ',' + y + ')');
+    mapEl.setAttribute('transform',
+                       'translate(' + x + ',' + y + ')');
   }
 
   
@@ -91,7 +94,9 @@ app.map = (function($) {
     setOrigin(shellSize.width / 2, shellSize.height / 2 );
 
     hexGrid(2);
-    container.appendChild(app.grid.getElement());
+
+    mapEl.appendChild(app.grid.getElement());
+    container.appendChild(mapEl);
     
   };
 

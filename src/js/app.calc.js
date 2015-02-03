@@ -11,17 +11,16 @@ app.calc = (function($) {
     var vertices = [];
 
     var angle = null;
-    var offset = offset || Math.PI / sides;
 
     for (var i = 0; i < sides; i++) {
-      angle = 2 * Math.PI / sides * i + offset;
+      angle = 2 * Math.PI / sides * i + (offset || Math.PI / sides);
       vertices.push((radius * Math.cos(angle)),
                     (radius * Math.sin(angle)));
     }
 
     return vertices;
   }
-  
+
   var isoHexDimensions = function(radius, pointy_p) {
     var res = {};
 
